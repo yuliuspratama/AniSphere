@@ -28,10 +28,19 @@ npm install
 ```
 
 2. Set up environment variables:
-```bash
-cp .env.local.example .env.local
-# Edit .env.local with your Supabase credentials
-```
+   
+   Create a `.env.local` file in the root directory with the following variables:
+   ```bash
+   # Supabase Configuration
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+   ```
+   
+   **Important**: 
+   - Get these values from your Supabase project dashboard: https://app.supabase.com
+   - Never commit `.env.local` to version control (it's already in `.gitignore`)
+   - Only use `NEXT_PUBLIC_*` variables for client-side code
+   - Never expose your service role key!
 
 3. Run database migrations:
 - Go to Supabase Dashboard → SQL Editor
@@ -127,6 +136,42 @@ Or generate from a logo/image:
 convert logo.png -resize 192x192 public/icon-192x192.png
 convert logo.png -resize 512x512 public/icon-512x512.png
 ```
+
+## Security
+
+AniSphere has been built with security best practices in mind:
+
+- ✅ Input validation and sanitization
+- ✅ XSS prevention utilities
+- ✅ Rate limiting on API routes
+- ✅ Row Level Security (RLS) enabled on all database tables
+- ✅ Secure authentication with Supabase Auth
+- ✅ Environment variables properly secured
+- ✅ No hardcoded secrets or credentials
+
+See [SECURITY.md](./SECURITY.md) and [SECURITY_CHECKLIST.md](./SECURITY_CHECKLIST.md) for detailed security documentation.
+
+**Before pushing to production:**
+1. Review all RLS policies in Supabase dashboard
+2. Ensure `.env.local` is not committed (already in `.gitignore`)
+3. Verify OAuth redirect URLs in Supabase dashboard
+4. Run `npm audit` to check for vulnerabilities
+5. Test authentication flows
+6. Review [SECURITY_CHECKLIST.md](./SECURITY_CHECKLIST.md)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+**Important**: Never commit:
+- `.env.local` or any `.env*` files
+- API keys, secrets, or credentials
+- `node_modules/` directory
+- Build artifacts
 
 ## License
 

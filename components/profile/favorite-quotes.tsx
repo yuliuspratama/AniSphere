@@ -184,7 +184,7 @@ export function FavoriteQuotes({ userId }: { userId: string }) {
                 key={index}
                 className="relative rounded-lg border bg-muted/50 p-4"
               >
-                <div className="mb-2 text-4xl text-primary opacity-20">"</div>
+                <div className="mb-2 text-4xl text-primary opacity-20">&quot;</div>
                 <p className="mb-3 italic text-foreground">{quote.quote}</p>
                 <div className="flex items-center justify-between">
                   <div>
